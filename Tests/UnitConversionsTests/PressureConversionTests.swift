@@ -154,6 +154,32 @@ class PressureTests: XCTestCase {
         XCTAssertEqual(14.7, round(sealevel.value * 10) / 10)
     }
     
+    func testMillibars() {
+        let psi = Pressure(10, type: .psi)
+        let mb = psi.convert(to: .millibar)
+        let value = round(mb.value * 100) / 100
+        XCTAssertEqual(value, 689.48)
+    }
+    
+    func testVaporPressure() {
+        let temperature = Temperature(56.0, type: .fahrenheit)
+        let mb = Pressure.vaporPressure(temperature)
+        var value = round(mb.value * 10) / 10
+        XCTAssertEqual(value, 15.3)
+        
+        let psi = Pressure.vaporPressure(temperature, as: .psi)
+        value = round(psi.value * 100) / 100
+        XCTAssertEqual(value, 0.22)
+        
+        let dewPoint = DewPoint(temperature: temperature, humidity: RelativeHumidity(percent: 50))
+        let vaporPressure = Pressure.vaporPressure(dewPoint, as: .millibar)
+        value = round(vaporPressure.value * 100) / 100
+        XCTAssertEqual(value, 7.65)
+        
+        XCTAssertEqual(vaporPressure.description, "7.64560080147374 mb")
+        
+    }
+    
     static var allTests = [
         ("testConvertToPsiA", testConvertToPsiA),
         ("testConvertToPsiG", testConvertToPsiG),
@@ -161,6 +187,8 @@ class PressureTests: XCTestCase {
         ("testConvertToBar", testConvertToBar),
         ("testConvertToTorr", testConvertToTorr),
         ("testConvertToInchesWater", testConvertToInchesWater),
-        ("testPressureForAltitiude", testPressureForAltitude)
+        ("testPressureForAltitiude", testPressureForAltitude),
+        ("testMillibars", testMillibars),
+        ("testVaporPressure", testVaporPressure),
         ]
 }

@@ -35,6 +35,8 @@ extension Pressure: TypeConvertible {
             return value * 0.98692316931427
         case .torr:
             return value * 0.0013157893594089
+        case .millibar:
+            return value * 0.00098692316931427
         default: // we're already atmosphere pressure
             return value
         }
@@ -56,6 +58,8 @@ extension Pressure: TypeConvertible {
             value = convertToAtmosphere() / 0.0013157893594089
         case .bar:
             value = convertToAtmosphere() / 0.98692316931427
+        case .millibar:
+            value = convertToAtmosphere() / 0.00098692316931427
         }
         
         return Pressure(value, type: pressureType)
@@ -86,4 +90,31 @@ extension Pressure {
         let altitude = Length(feet, type: .feet)
         return Pressure.forAltitude(altitude: altitude, type: pressureType)
     }
+}
+
+
+// MARK: Saturated Vapor Pressure
+extension Pressure {
+    
+    private static func _vaporPressure(_ value: Temperature) -> Double {
+        let celsius = value.convert(to: .celsius).value
+        let exp = (7.5 * celsius) / (237.3 + celsius)
+        return 6.11 * pow(10.0, exp)
+    }
+    
+    /// This works for saturated vapor pressure of water when passed in
+    /// a temperature.
+    public static func vaporPressure(_ temperature: Temperature, as type: PressureType = .millibar) -> Pressure {
+        let value = _vaporPressure(temperature)
+        return Pressure(value, type: .millibar).convert(to: type)
+    }
+    
+    /// This works for saturated vapor pressure of water when passed in
+    /// a dew-point.
+    public static func vaporPressure(_ dewpoint: DewPoint, as type: PressureType = .millibar) -> Pressure {
+        let temperature = Temperature(dewpoint.value, type: dewpoint.temperature.type)
+        let value = _vaporPressure(temperature)
+        return Pressure(value, type: .millibar).convert(to: type)
+    }
+    
 }

@@ -21,6 +21,10 @@ final class DewPointTests: XCTestCase {
     func testDewPoint() {
         let dp = round(dewPoint.value * 100) / 100
         XCTAssertEqual(dp, 55.11)
+        
+        let dp2 = round(temperature.dewPoint(humidity: humidity).value * 100) / 100
+        XCTAssertEqual(dp2, 55.11)
+
     }
     
     func testDewPointCelsius() {

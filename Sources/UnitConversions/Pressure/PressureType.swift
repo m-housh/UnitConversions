@@ -6,7 +6,7 @@
 //
 
 public enum PressureType: Symbolic {
-    case psi, atmosphere, pascals, inchesWaterColumn, bar, torr
+    case psi, atmosphere, pascals, inchesWaterColumn, bar, torr, millibar
     
     public var symbol: String {
         switch self {
@@ -22,6 +22,8 @@ public enum PressureType: Symbolic {
             return "bar"
         case .torr:
             return "Torr"
+        case .millibar:
+            return "mb"
         }
     }
 }

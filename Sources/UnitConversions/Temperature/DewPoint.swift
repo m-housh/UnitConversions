@@ -21,7 +21,7 @@ public struct DewPoint {
 
 extension DewPoint: Valuable {
     
-    var value: Double {
+    public var value: Double {
         let naturalLog = log(humidity.value)
         let t = temperature.convert(to: .celsius).value
         
@@ -29,5 +29,12 @@ extension DewPoint: Valuable {
         
         return Temperature(value, type: .celsius).convert(to: temperature.type).value
         
+    }
+}
+
+extension Temperature {
+    
+    public func dewPoint(humidity: RelativeHumidity) -> DewPoint {
+        return DewPoint(temperature: self, humidity: humidity)
     }
 }
