@@ -10,10 +10,10 @@ import Foundation
 
 public struct WetBulb {
     
-    let temperature: Temperature
-    let humidity: RelativeHumidity
+    public let temperature: Temperature
+    public let humidity: RelativeHumidity
     
-    init(temperature: Temperature, humidity: RelativeHumidity) {
+    public init(temperature: Temperature, humidity: RelativeHumidity) {
         self.temperature = temperature
         self.humidity = humidity
     }
@@ -24,7 +24,7 @@ extension WetBulb: Valuable {
     
     //((-5.806+0.672×B13−0.006×B13×B13+(0.061+0.004×B13+0.000099×B13×B13)×D11+(-0.000033−0.000005×B13−0.0000001×B13×B13)×D11×D11)
     
-    var value: Double {
+    public var value: Double {
         let celsius = temperature.convert(to: .celsius).value
         let humidity = self.humidity.value * 100
         let value = (

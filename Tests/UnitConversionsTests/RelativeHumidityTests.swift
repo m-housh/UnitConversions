@@ -29,6 +29,12 @@ class RelativeHumidityTests: XCTestCase {
         XCTAssert(percent == decimal)
     }
     
+    func testInit() {
+        let percent = RelativeHumidity(50.0)
+        let decimal = RelativeHumidity(0.5)
+        XCTAssert(percent == decimal)
+    }
+    
     static var allTests = [
         ("testAsPercent", testAsPercent),
         ("testAsDecimal", testAsDecimal),

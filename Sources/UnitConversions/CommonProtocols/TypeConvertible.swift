@@ -6,7 +6,7 @@
 //
 
 
-protocol TypeConvertible: Valuable, Equatable, CustomStringConvertible, Typeable {
+public protocol TypeConvertible: Valuable, Equatable, CustomStringConvertible, Typeable {
     /* Objects that implement this protocol must provide a `convert` function that
        will return a new instance as the converted type.
      

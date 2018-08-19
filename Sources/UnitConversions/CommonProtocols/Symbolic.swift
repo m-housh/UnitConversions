@@ -6,7 +6,7 @@
 //
 //
 
-protocol Symbolic {
+public protocol Symbolic {
     /* Objects that implement this protocol have a `symbol` attribute
        That is a `String`.
      */

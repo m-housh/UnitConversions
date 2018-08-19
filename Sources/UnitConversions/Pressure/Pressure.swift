@@ -9,10 +9,10 @@ import Foundation
 
 public struct Pressure {
     
-    let value: Double
-    let type: PressureType
+    public let value: Double
+    public let type: PressureType
     
-    init(_ value: Double, type: PressureType = .psi) {
+    public init(_ value: Double, type: PressureType = .psi) {
         self.value = value
         self.type = type
     }
@@ -21,7 +21,7 @@ public struct Pressure {
 // MARK: TypeConvertible
 extension Pressure: TypeConvertible {
     
-    typealias UnitType = PressureType
+    public typealias UnitType = PressureType
     
     private func convertToAtmosphere() -> Double {
         switch type {

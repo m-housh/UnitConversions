@@ -5,7 +5,7 @@
 //  Created by Michael Housh on 10/4/17.
 //
 
-protocol Typeable {
+public protocol Typeable {
     
     associatedtype UnitType: Equatable, Symbolic
     

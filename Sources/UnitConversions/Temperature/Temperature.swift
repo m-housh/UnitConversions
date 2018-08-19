@@ -19,7 +19,7 @@ public struct Temperature {
 
 // MARK: TypeConvertible
 extension Temperature: TypeConvertible {
-    typealias UnitType = TemperatureType
+    public typealias UnitType = TemperatureType
     
     private func convertToFahrenheit() -> Double {
         // converts `self.value` to fahrenheit.

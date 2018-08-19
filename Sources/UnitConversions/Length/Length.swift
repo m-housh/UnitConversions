@@ -33,7 +33,7 @@
     // all conversions take place as inches to whatever
     // type the caller asks for or vice versa
     
-    typealias UnitType = LengthType
+    public typealias UnitType = LengthType
     
     private func convertToInches() -> Double {
         // converts the instances current value to inches

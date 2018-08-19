@@ -12,12 +12,21 @@ public struct RelativeHumidity: Valuable, CustomStringConvertible, Equatable {
     
     public let value: Double
     
-    init(percent: Double) {
+    public init(percent: Double) {
         self.value = percent / 100
     }
     
-    init(decimal: Double) {
+    public init(decimal: Double) {
         self.value = decimal
+    }
+    
+    public init(_ value: Double) {
+        if value > 1 {
+            self.init(percent: value)
+        }
+        else {
+            self.init(decimal: value)
+        }
     }
     
     public var description: String {
